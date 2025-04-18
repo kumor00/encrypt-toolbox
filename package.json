@@ -1,0 +1,286 @@
+{
+  "name": "encrypt-toolbox",
+  "displayName": "加密工具箱",
+  "description": "提供 Base64、Hex 编码解码，哈希计算，以及对称加解密（如 AES）的实用工具。",
+  "version": "0.0.1",
+  "publisher": "kumor00",
+  "engines": {
+    "vscode": "^1.99.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:encrypt-toolbox.base64Encode",
+    "onCommand:encrypt-toolbox.base64Decode",
+    "onCommand:encrypt-toolbox.hexEncode",
+    "onCommand:encrypt-toolbox.hexDecode",
+    "onCommand:encrypt-toolbox.hash.md5",
+    "onCommand:encrypt-toolbox.hash.sha1",
+    "onCommand:encrypt-toolbox.hash.sha256",
+    "onCommand:encrypt-toolbox.hash.sha512",
+    "onCommand:encrypt-toolbox.aesLogEncrypt",
+    "onCommand:encrypt-toolbox.aesLogDecrypt",
+    "onCommand:encrypt-toolbox.toUpperCase",
+    "onCommand:encrypt-toolbox.toLowerCase",
+    "onCommand:encrypt-toolbox.toggleCase"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "encrypt-toolbox.base64Encode",
+        "title": "🔐 Base64 编码"
+      },
+      {
+        "command": "encrypt-toolbox.base64EncodeCopy",
+        "title": "📋 Base64 编码并复制"
+      },
+      {
+        "command": "encrypt-toolbox.base64Decode",
+        "title": "🔓 Base64 解码"
+      },
+      {
+        "command": "encrypt-toolbox.base64DecodeCopy",
+        "title": "📋 Base64 解码并复制"
+      },
+      {
+        "command": "encrypt-toolbox.hexEncode",
+        "title": "🔐 Hex 编码"
+      },
+      {
+        "command": "encrypt-toolbox.hexEncodeCopy",
+        "title": "📋 Hex 编码并复制"
+      },
+      {
+        "command": "encrypt-toolbox.hexDecode",
+        "title": "🔓 Hex 解码"
+      },
+      {
+        "command": "encrypt-toolbox.hexDecodeCopy",
+        "title": "📋 Hex 解码并复制"
+      },
+      {
+        "command": "encrypt-toolbox.hashMd5",
+        "title": "🔒 MD5 哈希"
+      },
+      {
+        "command": "encrypt-toolbox.hashMd5Copy",
+        "title": "📋 MD5 哈希并复制"
+      },
+      {
+        "command": "encrypt-toolbox.hashSha1",
+        "title": "🔒 SHA1 哈希"
+      },
+      {
+        "command": "encrypt-toolbox.hashSha1Copy",
+        "title": "📋 SHA1 哈希并复制"
+      },
+      {
+        "command": "encrypt-toolbox.hashSha256",
+        "title": "🔒 SHA256 哈希"
+      },
+      {
+        "command": "encrypt-toolbox.hashSha256Copy",
+        "title": "📋 SHA256 哈希并复制"
+      },
+      {
+        "command": "encrypt-toolbox.hashSha512",
+        "title": "🔒 SHA512 哈希"
+      },
+      {
+        "command": "encrypt-toolbox.hashSha512Copy",
+        "title": "📋 SHA512 哈希并复制"
+      },
+      {
+        "command": "encrypt-toolbox.aesLogEncrypt",
+        "title": "🔐 日志加密"
+      },
+      {
+        "command": "encrypt-toolbox.aesLogDecrypt",
+        "title": "🔓 日志解密"
+      },
+      {
+        "command": "encrypt-toolbox.toUpperCase",
+        "title": "🔠 转换为大写"
+      },
+      {
+        "command": "encrypt-toolbox.toLowerCase",
+        "title": "🔡 转换为小写"
+      },
+      {
+        "command": "encrypt-toolbox.toggleCase",
+        "title": "🔁 大小写切换"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "submenu": "encrypt-toolbox.menuBase64",
+          "group": "1_navigation",
+          "when": "editorHasSelection"
+        },
+        {
+          "submenu": "encrypt-toolbox.menuHex",
+          "group": "1_navigation",
+          "when": "editorHasSelection"
+        },
+        {
+          "submenu": "encrypt-toolbox.menuHash",
+          "group": "1_navigation",
+          "when": "editorHasSelection"
+        },
+        {
+          "submenu": "encrypt-toolbox.menuCase",
+          "group": "1_navigation",
+          "when": "editorHasSelection"
+        },
+        {
+          "submenu": "encrypt-toolbox.menuAesLog",
+          "group": "2_navigation",
+          "when": "editorHasSelection"
+        }
+      ],
+      "encrypt-toolbox.menuBase64": [
+        {
+          "command": "encrypt-toolbox.base64Encode",
+          "group": "1_action"
+        },
+        {
+          "command": "encrypt-toolbox.base64Decode",
+          "group": "1_action"
+        },
+        {
+          "command": "encrypt-toolbox.base64EncodeCopy",
+          "group": "2_action"
+        },
+        {
+          "command": "encrypt-toolbox.base64DecodeCopy",
+          "group": "2_action"
+        }
+      ],
+      "encrypt-toolbox.menuHex": [
+        {
+          "command": "encrypt-toolbox.hexEncode",
+          "group": "1_action"
+        },
+        {
+          "command": "encrypt-toolbox.hexDecode",
+          "group": "1_action"
+        },
+        {
+          "command": "encrypt-toolbox.hexEncodeCopy",
+          "group": "2_action"
+        },
+        {
+          "command": "encrypt-toolbox.hexDecodeCopy",
+          "group": "2_action"
+        }
+      ],
+      "encrypt-toolbox.menuHash": [
+        {
+          "command": "encrypt-toolbox.hashMd5",
+          "group": "1_action"
+        },
+        {
+          "command": "encrypt-toolbox.hashSha1",
+          "group": "1_action"
+        },
+        {
+          "command": "encrypt-toolbox.hashSha256",
+          "group": "1_action"
+        },
+        {
+          "command": "encrypt-toolbox.hashSha512",
+          "group": "1_action"
+        },
+        {
+          "command": "encrypt-toolbox.hashMd5Copy",
+          "group": "2_action"
+        },
+        {
+          "command": "encrypt-toolbox.hashSha1Copy",
+          "group": "2_action"
+        },
+        {
+          "command": "encrypt-toolbox.hashSha256Copy",
+          "group": "2_action"
+        },
+        {
+          "command": "encrypt-toolbox.hashSha512Copy",
+          "group": "2_action"
+        }
+      ],
+      "encrypt-toolbox.menuAesLog": [
+        {
+          "command": "encrypt-toolbox.aesLogEncrypt",
+          "group": "1_action"
+        },
+        {
+          "command": "encrypt-toolbox.aesLogDecrypt",
+          "group": "1_action"
+        }
+      ],
+      "encrypt-toolbox.menuCase": [
+        {
+          "command": "encrypt-toolbox.toUpperCase",
+          "group": "1_action"
+        },
+        {
+          "command": "encrypt-toolbox.toLowerCase",
+          "group": "1_action"
+        },
+        {
+          "command": "encrypt-toolbox.toggleCase",
+          "group": "1_action"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "encrypt-toolbox.menuBase64",
+        "label": "🔐 Base64"
+      },
+      {
+        "id": "encrypt-toolbox.menuHex",
+        "label": "🔐 Hex"
+      },
+      {
+        "id": "encrypt-toolbox.menuHash",
+        "label": "🔒 哈希"
+      },
+      {
+        "id": "encrypt-toolbox.menuAesLog",
+        "label": "🔐 日志加密/解密"
+      },
+      {
+        "id": "encrypt-toolbox.menuCase",
+        "label": "🔤 大小写转换"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.99.0",
+    "@typescript-eslint/eslint-plugin": "^8.28.0",
+    "@typescript-eslint/parser": "^8.28.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "eslint": "^9.23.0",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "crypto-js": "^4.2.0"
+  }
+}
