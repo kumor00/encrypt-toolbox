@@ -2,14 +2,19 @@
   "name": "encrypt-toolbox",
   "displayName": "加密工具箱",
   "description": "提供 Base64、Hex 编码解码，哈希计算，以及对称加解密（如 AES）的实用工具。",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "publisher": "kumor00",
+  "icon": "icon.png",
   "engines": {
     "vscode": "^1.99.0"
   },
   "categories": [
     "Other"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kumor00/encrypt-toolbox.git"
+  },
   "activationEvents": [
     "onCommand:encrypt-toolbox.base64Encode",
     "onCommand:encrypt-toolbox.base64Decode",
@@ -137,7 +142,7 @@
         },
         {
           "submenu": "encrypt-toolbox.menuAesLog",
-          "group": "2_navigation",
+          "group": "1_navigation",
           "when": "editorHasSelection"
         }
       ],
@@ -281,6 +286,7 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
-    "crypto-js": "^4.2.0"
+    "crypto-js": "^4.2.0",
+    "iconv-lite": "^0.6.3"
   }
 }

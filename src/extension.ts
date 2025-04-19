@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import * as CryptoJS from 'crypto-js';
+import iconv from 'iconv-lite';
 
 function getSelectedText(): string | undefined {
 	const editor = vscode.window.activeTextEditor;
@@ -84,11 +85,22 @@ function decryptLog(hexCipherText: string): string {
 			padding: CryptoJS.pad.Pkcs7
 		});
 
-		const result = decrypted.toString(CryptoJS.enc.Utf8);
-		if (!result) {
+		// 把 WordArray 转成 Uint8Array
+		const decryptedWords = decrypted.words;
+		const decryptedSigBytes = decrypted.sigBytes;
+
+		const byteArray = new Uint8Array(decryptedSigBytes);
+		for (let i = 0; i < decryptedSigBytes; i++) {
+			byteArray[i] = (decryptedWords[i >>> 2] >>> (24 - (i % 4) * 8)) & 0xff;
+		}
+
+		// 用 iconv-lite 解码为 GBK 字符串
+		const gbkDecoded = iconv.decode(Buffer.from(byteArray), 'gbk');
+
+		if (!gbkDecoded) {
 			throw new Error('解密失败，可能密文无效或格式错误。');
 		}
-		return result;
+		return gbkDecoded;
 	} catch (e: any) {
 		throw new Error(`解密失败: ${e.message}`);
 	}
